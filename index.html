@@ -11,7 +11,11 @@
     <!-- Vendors -->
     <script type="text/javascript" src="./files/plugins.min.js"></script>
   </head>
-  <body style="overscroll-behavior:none;">
+  <body style="overscroll-behavior: none;
+    position: fixed;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;">
     <div class="ms-main-container loaded" style="opacity: 1;">
       <!-- Preloader -->
       <div class="ms-preloader" style="opacity: 0; visibility: hidden;"></div>
@@ -147,5 +151,9 @@
     <script type="text/javascript" src="./files/main.js"></script> 
 	<script type="text/javascript">
 	window.scrollTo(0,1);
+	document.body.addEventListener('touchmove', function(event) {
+  console.log(event.source);
+    event.preventDefault();
+}, false);
 	</script>	
 </body></html>
