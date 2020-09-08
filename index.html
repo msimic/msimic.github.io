@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>TS2: La Mappa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="./files/favicon-32x32.png">
+    <link rel="stylesheet" href="./files/plugins.min.css">
+    <link rel="stylesheet" href="./files/style.css">
+	<script src="./files/iv-viewer.min.js"></script>
+	<link rel="stylesheet" href="./files/iv-viewer.min.css">
+    <script type="text/javascript" src="./files/jquery-3.2.1.min.js"></script>
+    <!-- Vendors -->
+    <script type="text/javascript" src="./files/plugins.min.js"></script>
+  </head>
+  <body>
+    <div class="ms-main-container loaded" style="opacity: 1;">
+      <!-- Preloader -->
+      <div class="ms-preloader" style="opacity: 0; visibility: hidden;"></div>
+      <!-- Header -->
+      <header class="ms-header navbar-white">
+        <nav class="ms-nav">
+          <button class="hamburger" type="button" data-toggle="navigation">
+          <span class="hamburger-box">
+		  <div class="ms-logo" style="position:fixed;bottom:30px;right:90px;">
+            <a href="https://www.temporasanguinis.it/" data-type="page-transition">
+              <div class="logo-dark"><img src="./files/Unicorn-dark.png" alt="logo image"></div>
+              <div class="logo-light current"><img src="./files/Unicorn-light.png" alt="logo image"></div>
+            </a>
+          </div>
+            <span class="hamburger-label">menu</span>
+            <span class="hamburger-inner"></span>
+          </span>
+          </button>
+          <div class="height-full-viewport">
+            <ul class="ms-navbar">
+			  <!-- Nav Link -->
+              <li class="nav-item">
+                <a href="https://mudslinger.net/play/?host=mud.temporasanguinis.it&port=4000" data-type="page-transition">
+                  <span class="ms-btn">Il Gioco</span>
+                  <span class="nav-item__label">Gioca online</span>
+                </a>
+              </li>
+              <!-- Nav Link -->
+              <li class="nav-item">
+                <a href="https://www.temporasanguinis.it/" data-type="page-transition">
+                  <span class="ms-btn">Forum</span>
+                  <span class="nav-item__label">Discuti con i giocatori</span>
+                </a>
+              </li>
+              <!-- Nav Link -->
+              <li class="nav-item">
+                <a href="https://discord.gg/csPtrg9" data-type="page-transition">
+                  <span class="ms-btn">Discord</span>
+                  <span class="nav-item__label">Parla con il tuo gruppo</span>
+                </a>
+              </li>
+              <!-- Nav Link -->
+              <li class="nav-item">
+                <a href="https://www.facebook.com/TemporaSanguinis" data-type="page-transition">
+                  <span class="ms-btn">Facebook</span>
+                  <span class="nav-item__label">La Pagina Ufficiale</span>
+                </a>
+              </li>
+			  <!-- Nav Link -->
+              <li class="nav-item">
+                <a href="https://www.temporasanguinis.it/Mappa/mappa.html" data-type="page-transition">
+                  <span class="ms-btn">La Mappa</span>
+                  <span class="nav-item__label">Visita il nostro mondo</span>
+                </a>
+              </li>
+			  <!-- Nav Link -->
+              <li class="nav-item">
+                <a href="https://bitbucket.org/temporasanguinis/tskreator/downloads/?tab=downloads" data-type="page-transition">
+                  <span class="ms-btn">TSKreator</span>
+                  <span class="nav-item__label">Crea una zona</span>
+                </a>
+              </li>
+			  <!-- Nav Link -->
+              <li class="nav-item">
+                <a href="https://bitbucket.org/temporasanguinis/external-txt/issues?status=new&status=open" data-type="page-transition">
+                  <span class="ms-btn">Issues</span>
+                  <span class="nav-item__label">Hai un problema o un'idea?</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- Container -->
+      <main class="ms-container home-slider">
+        <!-- Swiper Slider -->
+        <div class="swiper-container swiper-container-horizontal">
+          <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
+            <!-- Slide -->
+            <div class="swiper-slide swiper-slide-active" style="width: 1920px; transform: translate3d(0px, 0px, 0px); transition: all 0ms ease 0s;">
+              <div class="slide-inner" data-swiper-parallax="45%" style="transform: translate3d(0px, 0px, 0px); transition: all 0ms ease 0s;">
+                <!--<div class="overlay"></div>-->
+                <div class="slide-inner--image" style="position:absolute;widht:100%;height:100%;">
+				<div id="map" style="height: 100%; width: auto !important;text-align: center;align-items: center;margin-right: auto;margin-left: auto;display: block;"/>
+					<script type="text/javascript">
+						const image = document.querySelector('#map');
+						const options = {
+							zoomValue: 30,
+							maxZoom: 250,
+							snapView: true,
+							refreshOnResize: true,
+							zoomOnMouseWheel: true
+						};
+						const viewer = new ImageViewer(image, options);
+						viewer.load('mappa_small.jpg', 'mappa.jpg');
+					</script>
+				</div>
+                <div class="slide-inner--info" style="pointer-events: none;padding-left: 0 !important;">
+                  <img id="impero" src="tempora.png" style="display: block;position: fixed;bottom: 0;" />
+				  <img id="leggenda" src="legenda.png" style="display: block;position: fixed;bottom: -75%;left: -42%;" />
+                </div>
+              </div>
+            </div>
+            <!-- Slide -->
+            <!-- <div class="swiper-slide swiper-slide-next" style="width: 1920px; transform: translate3d(0px, 0px, 0px); transition: all 0ms ease 0s;">
+              <div class="slide-inner" data-swiper-parallax="45%" style="transform: translate3d(-1152px, 0px, 0px); transition: all 0ms ease 0s;">
+                <div class="overlay"></div>
+                <div class="slide-inner--image">
+                </div>
+                <div class="slide-inner--info">
+                  <h1><br></h1>
+                  <a href="" data-type="page-transition" class="ms-btn--slider"></a>
+                </div>
+              </div>
+            </div>-->
+          </div>
+          <!--<div class="swiper-nav-btn">
+            <div class="swiper-button-prev swiper-button-white swiper-button-disabled">prev</div>
+            <div class="swiper-button-next swiper-button-white">next</div>
+          </div>-->
+          <!-- Pagination -->
+          <!--<div class="expanded-timeline">
+            <div class="expanded-timeline__counter"><span>1</span><span>4</span></div>
+            <div class="swiper-pagination swiper-pagination-progress"><span class="swiper-pagination-progressbar" style="transform: translate3d(0px, 0px, 0px) scaleX(0.25) scaleY(1); transition-duration: 1000ms;"></span></div>
+            <div class="scroll-message">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.5 15.98" class="scroll-svg"><title>Asset 1</title><g>
+              <g data-name="Layer 1"><polygon fill="#fff" points="0 4.64 0.71 5.34 3.85 2.2 3.85 15.98 4.85 15.98 4.85 2.2 8 5.34 8.71 4.64 4.35 0.29 0 4.64"></polygon><polygon fill="#fff" points="11.65 0 11.65 13.79 8.5 10.64 7.79 11.35 12.15 15.7 16.5 11.35 15.79 10.64 12.65 13.79 12.65 0 11.65 0"></polygon></g></g></svg>Scroll
+            </div>
+          </div>-->
+        </div>
+      </main>
+    </div>
+    <script type="text/javascript" src="./files/main.js"></script>  
+</body></html>
