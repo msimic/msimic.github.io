@@ -94,13 +94,13 @@
             <div class="swiper-slide swiper-slide-active" style="width: 1920px; transform: translate3d(0px, 0px, 0px); transition: all 0ms ease 0s;">
               <div class="slide-inner" data-swiper-parallax="45%" style="transform: translate3d(0px, 0px, 0px); transition: all 0ms ease 0s;">
                 <!--<div class="overlay"></div>-->
-                <div class="slide-inner--image" style="position:absolute;widht:100%;height:100%;">
+                <div class="slide-inner--image" style="position:absolute;width:100%;height:100%;">
 				<div id="map" style="height: 100%; width: auto !important;text-align: center;align-items: center;margin-right: auto;margin-left: auto;display: block;"/>
 					<script type="text/javascript">
 						const image = document.querySelector('#map');
 						const options = {
 							zoomValue: 30,
-							maxZoom: 250,
+							maxZoom: 500,
 							snapView: true,
 							refreshOnResize: true,
 							zoomOnMouseWheel: true
@@ -109,9 +109,9 @@
 						viewer.load('mappa_small.jpg', 'mappa.jpg');
 					</script>
 				</div>
-                <div class="slide-inner--info" style="pointer-events: none;padding-left: 0 !important;">
-                  <img id="impero" src="tempora.png" style="display: block;position: fixed;bottom: 0;" />
-				  <img id="leggenda" src="legenda.png" style="display: block;position: fixed;bottom: -75%;left: -42%;" />
+                <div class="slide-inner--info" style="pointer-events: none;padding-left: 0 !important;position:fixed;width:100%;height:100%;">
+                  <img id="impero" src="tempora.png" style="display: block;    position: fixed;    top: 0;    height: 140px;    object-fit: contain;" />
+				  <img id="leggenda" src="legenda.png" style="    display: block;    position: fixed;    width: 340px;    object-fit: contain;    bottom: 2%;    left: 2%;" />
                 </div>
               </div>
             </div>
