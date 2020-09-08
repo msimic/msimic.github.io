@@ -91,7 +91,7 @@
         <div class="swiper-container swiper-container-horizontal">
           <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
             <!-- Slide -->
-            <div class="swiper-slide swiper-slide-active" style="width: 1920px; transform: translate3d(0px, 0px, 0px); transition: all 0ms ease 0s;">
+            <div class="swiper-slide swiper-slide-active" style="width: 100%; transform: translate3d(0px, 0px, 0px); transition: all 0ms ease 0s;">
               <div class="slide-inner" data-swiper-parallax="45%" style="transform: translate3d(0px, 0px, 0px); transition: all 0ms ease 0s;">
                 <!--<div class="overlay"></div>-->
                 <div class="slide-inner--image" style="position:absolute;width:100%;height:100%;">
@@ -109,10 +109,6 @@
 						viewer.load('mappa_small.jpg', 'mappa.jpg');
 					</script>
 				</div>
-                <div class="slide-inner--info" style="pointer-events: none;padding-left: 0 !important;position:fixed;width:100%;height:100%;">
-                  <img id="impero" src="tempora.png" style="display: block;    position: relative;    top: 3%;    width: 20% !important;    object-fit: contain;    margin-left: auto;    margin-right: auto;" />
-				  <img id="leggenda" src="legenda.png" style="    display: block;    position: fixed;   width: 20% !important;    object-fit: contain;    bottom: 2%;    left: 2%;" />
-                </div>
               </div>
             </div>
             <!-- Slide -->
@@ -143,6 +139,10 @@
           </div>-->
         </div>
       </main>
+	  <div style="pointer-events: none;padding-left: 0 !important;position:fixed;width:100%;height:100%;z-index:999;top:0;">
+		  <img id="impero" src="tempora.png" style="display: block;    position: relative;    top: 3%;    width: 20% !important;    object-fit: contain;    margin-left: auto;    margin-right: auto;" />
+		  <img id="leggenda" src="legenda.png" style="    display: block;    position: fixed;   width: 20% !important;    object-fit: contain;    bottom: 2%;    left: 2%;" />
+		</div>
     </div>
     <script type="text/javascript" src="./files/main.js"></script> 
 	<script type="text/javascript">
