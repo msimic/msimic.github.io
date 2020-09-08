@@ -103,6 +103,9 @@ img {
 	overscroll-behavior-y: contain;
 	overscroll-behavior-x: contain;
 }
+.ms-main-container, .ms-container, .swiper-container, .swiper-wrapper, .swiper-slide, .slide-inner, .slide-inner--image, .iv-wrap, .iv-snap-view, .iv-image-view {
+	overscroll-behavior: none;
+}
 /* 1.1 Typography */
 
 h1,
