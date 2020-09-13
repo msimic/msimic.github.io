@@ -12,10 +12,50 @@ body {
     background: #151515;
     padding: 0;
     margin: 0 auto;
-    min-height: 100vh;
     font-family: 'Yantramanav', Arial, sans-serif;
-    color: #151515;
+    color: #C5C5C5;
 }
+
+html, body {
+	height: 100%;
+    overflow: hidden;
+}
+
+.navbar-wrapper {
+	position: relative;
+	text-align: center;
+	margin: 0;
+}
+
+.menu-title {
+	width: auto;
+    padding: 0;
+    color: #df1f29;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1s ease;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: relative;
+	white-space: nowrap;
+	margin-bottom: 20px;
+    margin-top: -20px;
+}
+
+.menu-title h3 {
+    color: #df1f29;
+	margin: 0;
+    padding: 0;
+	font-size: xx-large;
+}
+
+.is-visible .menu-title {
+    opacity: 1 !important;
+    transition: opacity 1s ease 1s;
+}
+
 article,
 aside,
 details,
@@ -90,6 +130,14 @@ input[type="submit"]:focus {
 img {
     width: 100%;
 }
+
+.slider-box {
+	margin: 0% !important;
+    width: 80% !important;
+    left: 10% !important;
+	height: 80% !important;
+    top: 10% !important;
+}
 .leggenda {
 	width: 20% !important;
 }
@@ -106,6 +154,27 @@ img {
 .ms-main-container, .ms-container, .swiper-container, .swiper-wrapper, .swiper-slide, .slide-inner, .slide-inner--image, .iv-wrap, .iv-snap-view, .iv-image-view {
 	overscroll-behavior: none;
 }
+
+#Body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+}
+
+#Body::-webkit-scrollbar {
+  display: none;
+}
+#Body {
+	overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 /* 1.1 Typography */
 
 h1,
@@ -247,7 +316,7 @@ p {
   position: relative;
   display: flex;
   align-items: center;
-  width: 11em;
+  width: auto;
   font-weight: 600;
   letter-spacing: .15em;
 }
@@ -407,6 +476,16 @@ p {
     display: flex;
     align-items: center;
 }
+
+.height-full-viewport::-webkit-scrollbar {
+  display: none;
+}
+.height-full-viewport {
+	overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .height-full-viewport {
     position: fixed;
     display: flex;
@@ -418,9 +497,10 @@ p {
     top: 0;
     width: 100%;
     height: 0%;
-    background-color: #151515;
+    background-color: #1d0202e6;;
     z-index: 5;
     overflow: hidden;
+	overflow-y: scroll;
     transition: height .8s cubic-bezier(0.3, 1, 0.3, 1) .1s;
 }
 .ms-navbar {
@@ -440,9 +520,8 @@ p {
     cursor: pointer;
     padding: .75em;
     opacity: 0;
-    width: 240px;
-    margin-left: 3em;
     transition: opacity .3s ease;
+	margin: 0 !important;
 }
 .ms-navbar a {
     display: block;
@@ -524,9 +603,9 @@ p {
     background-color: #151515;
 }
 .ms-main-container {
-    position: relative;
+    position: fixed;
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
     opacity: 0;
     background-color: #fff;
 }
@@ -572,6 +651,7 @@ p {
 }
 .swiper-slide {
     overflow: hidden;
+	background: black !important;
 }
 .overlay {
     position: absolute;
@@ -1148,9 +1228,21 @@ footer {
     padding-left: 15px;
 }
 
+ 
+.slider-box::-webkit-scrollbar {
+  display: none;
+}
+.slider-box {
+	overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
 /**
  * 11. Responsive Rules
  */
+
 
 @media only screen and (max-width: 805px) {
 	.leggenda {
@@ -1165,6 +1257,10 @@ footer {
     h6 {
         font-size: 16px;
     }
+	h3 {
+        font-size: 18px;
+		margin-bottom: 10px;
+    }
     blockquote {
         margin: 0 auto 15px;
         font-size: 1em;
@@ -1178,6 +1274,7 @@ footer {
     .ms-navbar .ms-btn {
         font-size: 1.4em;
     }
+
     .ms-navbar {
         position: relative;
         width: 100%;
@@ -1218,8 +1315,7 @@ footer {
     .slide-inner--info {
         width: 100%;
         text-align: center;
-        min-height: 50px;
-        bottom: 10vh;
+        min-height: 30px;
         padding-left: 0;
         color: #fff;
         z-index: 1;
@@ -1229,13 +1325,17 @@ footer {
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+		overflow: auto;
+		bottom: 2vh;
+		font-size: small;
     }
+
     .ms-btn--slider {
         margin: 0 auto;
         display: inline-block;
         letter-spacing: .15em;
-        background: #df1f29;
-        color: #fff;
+        /*background: #df1f29;
+        color: #fff;*/
         padding: .5em 0;
     }
     .ms-btn--slider::before {

@@ -13,6 +13,40 @@
     Sort();
     UniteGallery();
     ValidForm();
+	//window.scrollTo(0,1);
+	function preventBehavior(e) {
+		e.preventDefault(); 
+	};
+
+	var Body = $("#Body");
+	
+	function SetSize(h) {
+		Body.height(h);
+		$(".swiper-container").height(h);
+		$(".swiper-wrapper").height(h);
+		$(".swiper-slide").height(h);
+		//alert(" Height: "+ Body.height());
+	}
+	
+	function onResize() {
+		SetSize(document.documentElement.clientHeight);
+		
+	}
+	//document.addEventListener("touchmove", preventBehavior, {passive: false});
+	//document.body.addEventListener("touchmove", preventBehavior, {passive: false});
+
+	window.addEventListener("resize", onResize, {passive: false});
+
+var objNode = document.createElement("div");
+objNode.style.width  = "100vw";
+objNode.style.height = "100vh";
+document.body.appendChild(objNode);
+var intViewportWidth  = objNode.offsetWidth;
+var intViewportHeight = objNode.offsetHeight;
+document.body.removeChild(objNode);
+//alert("Width: " + intViewportWidth + " Height: "+ intViewportHeight);
+SetSize(intViewportHeight);
+	onResize();
 
 })(window);
 
@@ -50,7 +84,7 @@ function PageTransition() {
     });
     $(document).on('click', '[data-type="page-transition"]', function(e) {
         var url = $(this).attr('href');
-        if (url != '#' && url != '') {
+        if (url != '#' && url != '' && url != undefined) {
             e.preventDefault();
             $('.ms-preloader').css('visibility', 'visible');
             var url = $(this).attr('href');
@@ -63,7 +97,13 @@ function PageTransition() {
                     window.location.href = url;
                 }
             });
-        }
+        } else if (url == undefined) {
+            $('.hamburger').toggleClass('is-active');
+            $('.ms-nav').toggleClass('is-visible');
+            $('.ms-header').not('.navbar-white').each(function() {
+                $('.logo-light').toggleClass('active');
+            });
+		}
     });
 }
 
@@ -85,10 +125,12 @@ function Menu() {
                 $(window).off('scroll');
             }
             $(burger).toggleClass('is-active');
+			var isActive = $(burger).hasClass('is-active');
             $('.ms-nav').toggleClass('is-visible');
             $('.ms-header').not('.navbar-white').each(function() {
                 $('.logo-light').toggleClass('active');
             });
+			$('.ms-nav > a').prop('disabled', !isActive);
         });
     }
 }
@@ -138,26 +180,71 @@ function HomeSlider() {
                 }
             }
         };
+		
         var swiperOptions = {
             loop: false,
             speed: 1000,
             grabCursor: false,
             watchSlidesProgress: true,
-            mousewheelControl: true,
-            keyboardControl: true,
+            mousewheelControl: false,
+            keyboardControl: false,
             nextButton: '.swiper-button-next',
             prevButton: '.swiper-button-prev',
-            simulateTouch: false,
+            simulateTouch: true,
             pagination: '.swiper-pagination',
+			direction: "horizontal",
+			allowTouchMove: false,
+			allowSlidePrev: false,
+			allowSlideNext: false,
+			shortSwipes: false,
+			longSwipes: false,
+			swipeHandler: "null",
+			simulateTouch: true,
+			touchMoveStopPropagation: true,
+			passiveListeners: false,
+			runCallbacksOnInit: true,
+			observer: true,
+            observeParents: true,
+			initialSlide: 2,
+			fadeEffect: { crossFade: true },
+			slidesPerView: 1,
             paginationType: 'progress',
             onSlideChangeEnd: function() {
-                $('.expanded-timeline__counter span:first-child').text(swiper.activeIndex + 1);
+                if (window.swiper) $('.expanded-timeline__counter span:first-child').text(swiper.activeIndex + 1);
+				if (window.swiper && window.swiper != undefined && window.swiper.activeIndex == 1) {
+					$(".ms-logo").hide();
+					if ($("#gioco").find("iframe").length == 0) {
+						var ifr = $('<iframe frameBorder="0" width="100%" height="100%" src="/client/index.html?host=mud.temporasanguinis.it&port=4000&rng=' + Math.ceil(Math.random() * 1000000) + '">Browser non compatibile. Usa Firefox o Chrome.</iframe>');
+						var focusWhenReady = function(){
+							var iframe = ifr[0],
+							doc = iframe.contentDocument || iframe.contentWindow.document;
+							if (doc.readyState == "complete") {
+								iframe.contentWindow.focus();
+								$(iframe).contents().find("#cmdInput").focus(); 
+							} else {
+								setTimeout(focusWhenReady, 100)
+							}
+						}
+						ifr.appendTo($("#gioco"));
+						setTimeout(focusWhenReady, 100);
+					}
+				} else {
+					$(".ms-logo").show();
+				}
             }
         };
         swiperOptions = $.extend(swiperOptions, interleaveEffect);
         var swiper = new Swiper('.swiper-container', swiperOptions);
+		swiper.allowTouchMove = false;
+		swiper.allowSlidePrev = false;
+		swiper.allowSlideNext = false;
+		swiper.simulateTouch = true;
+		swiper.touchMoveStopPropagation = true;
+		swiper.passiveListeners = false;
         $('.expanded-timeline__counter span:first-child').text('1');
         $('.expanded-timeline__counter span:last-child').text(swiper.slides.length);
+		window.swiper = swiper;
+		swiper.slideTo(0);
     }
 }
 
