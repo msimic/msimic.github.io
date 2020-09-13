@@ -26,7 +26,7 @@
           <button class="hamburger" type="button" data-toggle="navigation">
           <span class="hamburger-box">
 		  <div class="ms-logo" style="position:fixed;bottom:20px;right:40px;height:32px !important;">
-            <a onclick="swiper.slideTo(1);return false;" title="Gioca a Tempora Sanguinis 2" alt="Gioca" data-type="page-transition">
+            <a onclick="swiper.slideTo(1);history.replaceState(undefined, undefined, '#play');return false;" title="Gioca a Tempora Sanguinis 2" alt="Gioca" data-type="page-transition">
               <div class="logo-dark"><img src="./sitefiles/Unicorn-dark.png" alt="logo image"></div>
               <div class="logo-light current"><img src="./sitefiles/Unicorn-light.png" alt="logo image"></div>
             </a>
@@ -43,14 +43,14 @@
 				<ul class="ms-navbar">
 				  <!-- Nav Link -->
 				  <li class="nav-item">
-					<a disabled alt="Benvenuto" onclick="swiper.slideTo(0);return false;" data-type="page-transition">
+					<a disabled alt="Benvenuto" onclick="swiper.slideTo(0);history.replaceState(undefined, undefined, '#home');return false;" data-type="page-transition">
 					  <span class="ms-btn">Benvenuto</span>
 					  <span class="nav-item__label">Torna alla pagina iniziale</span>
 					</a>
 				  </li>
 				  <!-- Nav Link -->
 				  <li class="nav-item">
-					<a disabled  alt="Gioca" onclick="swiper.slideTo(1);return false;"  data-type="page-transition">
+					<a disabled  alt="Gioca" onclick="swiper.slideTo(1);history.replaceState(undefined, undefined, '#play');return false;"  data-type="page-transition">
 					  <span class="ms-btn">Gioca</span>
 					  <span class="nav-item__label">Connettiti e gioca online</span>
 					</a>
@@ -64,14 +64,14 @@
 				  </li>
 				  <!-- Nav Link -->
 				  <li class="nav-item">
-					<a disabled  alt="La Mappa" onclick="swiper.slideTo(3);return false;" data-type="page-transition">
+					<a disabled  alt="La Mappa" onclick="swiper.slideTo(3);history.replaceState(undefined, undefined, '#map');return false;" data-type="page-transition">
 					  <span class="ms-btn">La Mappa</span>
 					  <span class="nav-item__label">Visita il nostro mondo</span>
 					</a>
 				  </li>
 				  <!-- Nav Link -->
 				  <li class="nav-item">
-					<a disabled  href="https://discord.gg/csPtrg9" data-type="page-transition">
+					<a disabled  href="https://discord.gg/p7fEZnS" data-type="page-transition">
 					  <span class="ms-btn">Discord</span>
 					  <span class="nav-item__label">Parla con il tuo gruppo</span>
 					</a>
@@ -126,24 +126,27 @@ Midia, la bianca città posta al centro delle terre conosciute, ti accoglie tra 
 Benvenuto su Tempora Sanguinis.</p>
 				</p>
 				<p>
-				Preparati ed <a style="cursor:pointer;" onclick="swiper.slideTo(3);return false;" title="La Mappa di Tempora Sanguinis 2" alt="Mappa">esplora le terre conosciute dell'impero celeste</a>, su cui si aprono arcane fratture che portano a mondi astrali.
+				Preparati ed <a style="cursor:pointer;" onclick="swiper.slideTo(3);history.replaceState(undefined, undefined, '#map');return false;" title="La Mappa di Tempora Sanguinis 2" alt="Mappa">esplora le terre conosciute dell'impero celeste</a>, su cui si aprono arcane fratture che portano a mondi astrali.
 				</p>
 				<p>E se hai il coraggio 
-				<a style="cursor:pointer;" onclick="swiper.slideTo(1);return false;" title="Gioca a Tempora Sanguinis 2" alt="Gioca">
+				<a style="cursor:pointer;" onclick="swiper.slideTo(1);history.replaceState(undefined, undefined, '#play');return false;" title="Gioca a Tempora Sanguinis 2" alt="Gioca">
 					gioca a Tempora Sanguinis 2
-				</a> online. Oppure conettiti via telnet (o un client dedicato [CMD, Mudlet,...]) a "mud.temporasanguinis.it" alla porta 4000.
+				</a> online. Oppure conettiti via telnet (o un client dedicato [CMUD, Mudlet,...]) a "mud.temporasanguinis.it" alla porta 4000.
 				</p>
 				<p>
 					Tempora Sanguinis e' un gioco di ruolo e d'azione (ARPG) testuale (MUD) con agevolazioni per non vedenti.
 				</p>
-				<p>Per ulteriori informazioni e link utili usa il menu in alto a destra.
+				<p style="padding-bottom:40px;">Per ulteriori informazioni e link utili usa il menu in alto a destra.
 				</p>
                 </div>
                 <div class="slide-inner--info" aria-live="assertive">
                   <h3>Tempora Sanguinis 2<br></h3>
-                  <a href="" data-type="page-transition" class="ms-btn--slider">Esplora, combatti, conquista!</a>
+                  <a href="" onclick="swiper.slideTo(1);history.replaceState(undefined, undefined, '#play');return false;" title="Gioca a Tempora Sanguinis 2" data-type="page-transition" class="ms-btn--slider">Esplora, combatti, conquista!</a>
                 </div>
               </div>
+			  	<div class="arrowcontainer">
+					<img class="arrow1" src="sitefiles/down-arrow.png" alt="Scrolla giu" />
+				</div>
             </div>
 			<!-- Slide -->
 			<div class="swiper-slide swiper-slide-next" style="width: 100%; transform: translate3d(0px, 0px, 0px); transition: all 0ms ease 0s;">

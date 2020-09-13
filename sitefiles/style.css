@@ -27,6 +27,35 @@ html, body {
 	margin: 0;
 }
 
+.arrow1 {
+  animation: slide1 1s ease-in-out infinite;
+  margin-left: 0px;
+	height: auto;
+	width: auto;
+	bottom: 3%;
+	opacity: .5;
+	overflow: visible;
+	cursor:pointer;
+}
+
+.arrowcontainer {
+	position: absolute;
+	width:100%;
+    bottom: 30px;
+	text-align:center;
+}
+
+@keyframes slide1 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(0, 10px);
+  }
+}
+
 .menu-title {
 	width: auto;
     padding: 0;
@@ -1372,4 +1401,7 @@ footer {
     .ms-footer .socials {
         display: none;
     }
+	.arrowcontainer {
+		text-align:left;
+	}
 }

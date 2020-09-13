@@ -28,10 +28,51 @@
 		//alert(" Height: "+ Body.height());
 	}
 	
+	var sld = $(".swiper-slide-active .slider-box");
+	
 	function onResize() {
 		SetSize(document.documentElement.clientHeight);
-		
+		onArrow();
 	}
+	
+	function onArrow() {
+		if (sld.scrollTop() + 
+			sld.innerHeight() >=  
+			sld[0].scrollHeight) { 
+			$(".arrowcontainer").hide();
+		} else {
+			$(".arrowcontainer").show();
+		}
+	}
+	
+	var timeout;
+	var speed = 400;
+
+	// Increment button
+	$('.arrowcontainer').on('mousedown mouseup mouseleave', e => {
+	  if (e.type == "mousedown") {
+		increment(speed);
+	  } else {
+		stop()
+	  }
+	});
+
+	// Increment function
+	function increment(speed) {
+	  sld.scrollTop(sld.scrollTop()+15)
+	  timeout = setTimeout(() => {
+		increment(speed*0.9);
+	  }, speed);
+	}
+
+	function stop() {
+	  clearTimeout(timeout);
+	}
+	
+	sld.on('scroll', function() { 
+		onArrow();
+	}); 
+
 	//document.addEventListener("touchmove", preventBehavior, {passive: false});
 	//document.body.addEventListener("touchmove", preventBehavior, {passive: false});
 
@@ -47,6 +88,24 @@ document.body.removeChild(objNode);
 //alert("Width: " + intViewportWidth + " Height: "+ intViewportHeight);
 SetSize(intViewportHeight);
 	onResize();
+	
+function hashChanged() {
+	if (window.location.hash=="#map") {
+		swiper.slideTo(3);
+	}
+	else if (window.location.hash=="#play") {
+		swiper.slideTo(1);
+	}
+	else if (window.location.hash=="#home") {
+		swiper.slideTo(0);
+	}
+};
+
+$("document").ready(function() {
+	hashChanged();
+});
+
+window.addEventListener("hashchange", hashChanged, false);
 
 })(window);
 
@@ -214,7 +273,7 @@ function HomeSlider() {
 				if (window.swiper && window.swiper != undefined && window.swiper.activeIndex == 1) {
 					$(".ms-logo").hide();
 					if ($("#gioco").find("iframe").length == 0) {
-						var ifr = $('<iframe frameBorder="0" width="100%" height="100%" src="/client/index.html?host=mud.temporasanguinis.it&port=4000&rng=' + Math.ceil(Math.random() * 1000000) + '">Browser non compatibile. Usa Firefox o Chrome.</iframe>');
+						var ifr = $('<iframe frameBorder="0" width="100%" height="100%" src="/client/index.html?host=auto&rng=' + Math.ceil(Math.random() * 1000000) + '">Browser non compatibile. Usa Firefox o Chrome.</iframe>');
 						var focusWhenReady = function(){
 							var iframe = ifr[0],
 							doc = iframe.contentDocument || iframe.contentWindow.document;
