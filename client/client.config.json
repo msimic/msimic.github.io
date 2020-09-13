@@ -1,5 +1,5 @@
 {
 	"apiBaseUrl": null,
-	"socket_io_host": "tn1.mudslinger.rooflez.com",
+	"socket_io_host": "http://tn1.mudslinger.rooflez.com:80",
 	"socket_io_port": 80
 }
