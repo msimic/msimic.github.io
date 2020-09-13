@@ -37,7 +37,7 @@
 	
 	function onArrow() {
 		if (sld.scrollTop() + 
-			sld.innerHeight() >=  
+			sld.innerHeight() + 8 >=  
 			sld[0].scrollHeight) { 
 			$(".arrowcontainer").hide();
 		} else {
@@ -95,13 +95,19 @@ function hashChanged() {
 	}
 	else if (window.location.hash=="#play") {
 		swiper.slideTo(1);
+		window.showClient();
 	}
 	else if (window.location.hash=="#home") {
 		swiper.slideTo(0);
 	}
 };
 
+window.hashChanged = hashChanged;
+
+if (window.location.hash) window.needhashChanged = true;
+
 $("document").ready(function() {
+	swiper.slideTo(0);
 	hashChanged();
 });
 
@@ -194,6 +200,24 @@ function Menu() {
     }
 }
 
+window.showClient=function() {
+	if ($("#gioco").find("iframe").length == 0) {
+		var ifr = $('<iframe frameBorder="0" width="100%" height="100%" src="/client/index.html?host=auto&rng=' + Math.ceil(Math.random() * 1000000) + '">Browser non compatibile. Usa Firefox o Chrome.</iframe>');
+		var focusWhenReady = function(){
+			var iframe = ifr[0],
+			doc = iframe.contentDocument || iframe.contentWindow.document;
+			if (doc.readyState == "complete") {
+				iframe.contentWindow.focus();
+				$(iframe).contents().find("#cmdInput").focus(); 
+			} else {
+				setTimeout(focusWhenReady, 100)
+			}
+		}
+		ifr.appendTo($("#gioco"));
+		setTimeout(focusWhenReady, 100);
+	}
+}
+
 /*------------------
    Home Slider
 -------------------*/
@@ -268,25 +292,19 @@ function HomeSlider() {
 			fadeEffect: { crossFade: true },
 			slidesPerView: 1,
             paginationType: 'progress',
+			init: function() { 
+				if (window.needhashChanged == true) {
+					window.needhashChanged = false;
+					setTimeout(window.hashChanged, 500);
+					alert();
+					return;
+				}
+			},
             onSlideChangeEnd: function() {
                 if (window.swiper) $('.expanded-timeline__counter span:first-child').text(swiper.activeIndex + 1);
 				if (window.swiper && window.swiper != undefined && window.swiper.activeIndex == 1) {
 					$(".ms-logo").hide();
-					if ($("#gioco").find("iframe").length == 0) {
-						var ifr = $('<iframe frameBorder="0" width="100%" height="100%" src="/client/index.html?host=auto&rng=' + Math.ceil(Math.random() * 1000000) + '">Browser non compatibile. Usa Firefox o Chrome.</iframe>');
-						var focusWhenReady = function(){
-							var iframe = ifr[0],
-							doc = iframe.contentDocument || iframe.contentWindow.document;
-							if (doc.readyState == "complete") {
-								iframe.contentWindow.focus();
-								$(iframe).contents().find("#cmdInput").focus(); 
-							} else {
-								setTimeout(focusWhenReady, 100)
-							}
-						}
-						ifr.appendTo($("#gioco"));
-						setTimeout(focusWhenReady, 100);
-					}
+					window.showClient();
 				} else {
 					$(".ms-logo").show();
 				}
