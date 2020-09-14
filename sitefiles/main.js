@@ -100,6 +100,9 @@ function hashChanged() {
 	else if (window.location.hash=="#home") {
 		swiper.slideTo(0);
 	}
+	else if (window.location.hash=="#forum") {
+		swiper.slideTo(2);
+	}
 };
 
 window.hashChanged = hashChanged;
@@ -108,6 +111,7 @@ if (window.location.hash) window.needhashChanged = true;
 
 $("document").ready(function() {
 	swiper.slideTo(0);
+	onResize();
 	hashChanged();
 });
 
