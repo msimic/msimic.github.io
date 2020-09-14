@@ -206,7 +206,7 @@ function Menu() {
 
 window.showClient=function() {
 	if ($("#gioco").find("iframe").length == 0) {
-		var ifr = $('<iframe frameBorder="0" width="100%" height="100%" src="/client/index.html?host=auto&rng=' + Math.ceil(Math.random() * 1000000) + '">Browser non compatibile. Usa Firefox o Chrome.</iframe>');
+		var ifr = $('<iframe frameBorder="0" width="100%" height="100%" style="position:fixed;margin:0 !important;padding:0 !important;width: 100%;height:100%" src="/client/index.html?host=auto&rng=' + Math.ceil(Math.random() * 1000000) + '">Browser non compatibile. Usa Firefox o Chrome.</iframe>');
 		var focusWhenReady = function(){
 			var iframe = ifr[0],
 			doc = iframe.contentDocument || iframe.contentWindow.document;
