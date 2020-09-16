@@ -183,10 +183,15 @@ body {
     overflow: auto;
     resize: none;
 }
-.winEdit-pattern, .winEdit-textArea, .winEdit-scriptArea {
+.winEdit-pattern, .winEdit-textArea, .winEdit-scriptArea, .winEdit-id, .winEdit-className {
     margin: 3px;
     box-sizing: border-box;
 }
+
+.winEdit-id {
+    width: 100px;
+}
+
 /*
 .winEdit-btnNew {}
 .winEdit-btnDelete {}
@@ -271,6 +276,10 @@ body {
     text-align: right;
 }
 
+.right-pane .pane-optional {
+    text-align: left;
+}
+
 .left-pane .buttons button {
     flex: 1
 }
@@ -303,8 +312,31 @@ body {
     flex: none;
 }
 
+.underline {
+    text-decoration: underline;
+}
+
+.blink {
+    animation: blinker 1s linear infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
+.timeLog {
+    color: #777700;
+}
+
 .right-pane .pane-content {
-    flex: 1
+    flex: 1;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+.jqx-menu-item-separator {
+    border-bottom: 1px solid gray;
 }
 
 .vertical-center {
@@ -328,6 +360,29 @@ body {
 .preloaded {
     display: none !important;
 }
+
+ul.select {
+    list-style: none;
+    margin:  0;
+    padding: 2px;
+    border: 1px solid grey;
+    overflow-y: auto;
+    overflow-x: hidden;
+ }
+ 
+ ul.select li {
+    padding: 2px 6px;
+    font-size: small;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+ }
+ ul.select li:hover {
+    cursor: pointer;
+ }
+ ul.select li.selected {
+    background-color: #403f3f;
+    color: white;
+ }
 
 .slideLeftRight {
     animation: slide1 1s ease-in-out infinite;
