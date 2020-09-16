@@ -33,8 +33,9 @@ body {
     color: #a50000;
 }
 
-.play-button, .next-button, .prev-button, .pause-button {
+.play-button, .next-button, .prev-button, .pause-button, .play-game {
     display: inline-block;
+    cursor: pointer;
 }
 
 html, body {

@@ -27,24 +27,10 @@
         <nav class="ms-nav">
           <button class="hamburger" type="button" data-toggle="navigation">
           <span class="hamburger-box">
-			<div class="ms-logo play-game" style="position:fixed;bottom:20px;right:40px;height:32px !important;">
-				<a onclick="playGame();return false;" title="Gioca a Tempora Sanguinis" alt="Gioca" data-type="page-transition">
-				<div class="logo-dark"><img src="./sitefiles/Unicorn-dark.png" alt="logo image"></div>
-				<div class="logo-light current"><img src="./sitefiles/Unicorn-light.png" alt="logo image"></div>
-				</a>
-			</div>
-			<div class="ms-logo" style="position:fixed;bottom:20px;right:45px;height:32px !important;">
-				<a onclick="return false;" title="Audio" alt="Gioca" data-type="page-transition">
-				  <div class="play-button"><img src="./sitefiles/play.png" alt="Suona Audio"></div>
-				  <div class="pause-button"><img src="./sitefiles/pause.png" alt="Pausa Audio"></div>
-				  <div class="prev-button"><img src="./sitefiles/back.png" alt="Indietro Audio"></div>
-				  <div class="next-button"><img src="./sitefiles/forward.png" alt="Avanti Audio"></div>
-				</a>
-			  </div>
             <span class="hamburger-label">menu</span>
             <span class="hamburger-inner"></span>
           </span>
-          </button>
+		  </button>
           <div class="height-full-viewport">
 			<div class="navbar-wrapper">
 				<div class="menu-title" aria-live="assertive">	
@@ -110,8 +96,24 @@
 				</ul>
 			</div>
           </div>
-        </nav>
-      </header>
+		</nav>
+	  </header>
+	  <div style="position:fixed;top:70px;z-index: 9999;margin-top: 10px;right: 20px;opacity: 0.5;">
+		<div class="ms-logo play-game" style="display: block;height: 32px !important;width: 32px !important;float:right;">
+			<a onclick="playGame();return false;" title="Gioca a Tempora Sanguinis" alt="Gioca">
+			<div class="logo-dark"><img src="./sitefiles/Unicorn-dark.png" alt="logo image"></div>
+			<div class="logo-light current"><img src="./sitefiles/Unicorn-light.png" alt="logo image"></div>
+			</a>
+		</div>
+		<div class="ms-logo" style="display: block;height: 32px !important;float:right;">
+			<a onclick="return false;" title="Audio" alt="Gioca">
+			  <div class="play-button"><img src="./sitefiles/play.png" alt="Suona Audio"></div>
+			  <div class="pause-button"><img src="./sitefiles/pause.png" alt="Pausa Audio"></div>
+			  <div class="prev-button"><img src="./sitefiles/back.png" alt="Indietro Audio"></div>
+			  <div class="next-button"><img src="./sitefiles/forward.png" alt="Avanti Audio"></div>
+			</a>
+		  </div>
+	  </div>
       <!-- Container -->
       <main id="Body" class="ms-container home-slider">
         <!-- Swiper Slider -->
@@ -203,7 +205,7 @@
             </div>
           </div>
         </div>
-      </main>
+	  </main>
     </div>
     <script type="text/javascript" src="./sitefiles/main.js"></script> 
 </body></html>
