@@ -1,4 +1,5 @@
 @import 'https://fonts.googleapis.com/css?family=Yantramanav:100,300,400,500,700,900';
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
 
 ::selection {
     background: #555;   
@@ -13,12 +14,27 @@ body {
     padding: 0;
     margin: 0 auto;
     font-family: 'Yantramanav', Arial, sans-serif;
-    color: #C5C5C5;
+    color: #999999;
+}
+
+.slide-inner--info h3 {
+    font-family: 'Berkshire Swash', cursive;
+    color: #a50000;
+}
+.slide-inner--info a {
+    color: #7d7d7d;
 }
 
 .topheader {
 	margin-bottom: 10px !important;
     margin-top: 0px !important;
+    font-family: 'Berkshire Swash', cursive;
+    font-size: 30px;
+    color: #a50000;
+}
+
+.play-button, .next-button, .prev-button, .pause-button {
+    display: inline-block;
 }
 
 html, body {
@@ -64,7 +80,7 @@ html, body {
 .menu-title {
 	width: auto;
     padding: 0;
-    color: #df1f29;
+    color: #a50000;
     z-index: 1;
     opacity: 0;
     transition: opacity 1s ease;
@@ -79,10 +95,11 @@ html, body {
 }
 
 .menu-title h3 {
-    color: #df1f29;
+    color: #a50000;
 	margin: 0;
     padding: 0;
-	font-size: xx-large;
+    font-size: xx-large;
+    font-family: 'Berkshire Swash', cursive;
 }
 
 .is-visible .menu-title {
@@ -101,10 +118,16 @@ nav,
 section {
     display: block;
 }
+
 a {
-    color: #df1f29;
+    color: #a50000;
     text-decoration: none;
+    font-weight: bold;
 }
+a:hover {
+    color: #ff0000;
+}
+
 blockquote {
     padding: 10px 20px;
     color: #151515;
@@ -142,7 +165,7 @@ textarea {
 input:focus,
 textarea:focus {
     outline: none !important;
-    border: 1px solid #df1f29;
+    border: 1px solid #a50000;
     box-shadow: none;
 }
 input[type="submit"] {
@@ -326,7 +349,7 @@ p {
     left: 0;
     top: 0;
     width: 0%;
-    background: #df1f29;
+    background: #a50000;
     color: #fff;
     text-indent: 1rem;
     transition: all .3s ease;
@@ -335,7 +358,7 @@ p {
     bottom: 0;
 }
 .ms-button:hover {
-  color: #df1f29;
+  color: #a50000;
 }
 .ms-button:active::after,
 .ms-button:focus::after,
@@ -359,7 +382,7 @@ p {
     height: .1rem;
     width: 2rem;
     margin-right: .7rem;
-    background: #df1f29;
+    background: #a50000;
     transition: width .3s ease;
 }
 .ms-btn--slider:hover::before {
@@ -562,7 +585,7 @@ p {
 }
 .ms-navbar .ms-btn {
     display: inline-block;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     line-height: 1;
     padding: 0 0.25em;
     position: relative;
@@ -570,10 +593,11 @@ p {
 .ms-navbar .ms-btn {
     font-size: 1.75em;
     letter-spacing: .02em;
-    color: #fff;
+    color: #c5c5c5;
     font-weight: 700 !important;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    font-family: 'Berkshire Swash', cursive;
 }
 .ms-btn::before {
     content: '';
@@ -582,7 +606,7 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #df1f29;
+    background: #a50000;
     height: .1rem;
     top: 50%;
     width: 0;
@@ -611,7 +635,7 @@ p {
 .nav-item:active .ms-btn,
 .nav-item:focus .ms-btn,
 .nav-item:hover .ms-btn {
-    color: #df1f29;
+    color: #a50000;
     opacity: 1;
     padding-left: 2.4rem;
 }
@@ -657,7 +681,7 @@ p {
 .ms-page-title span {
     text-transform: uppercase;
     letter-spacing: .15em;
-    color: #df1f29;
+    color: #a50000;
 }
 .page-header {
     text-transform: uppercase;
@@ -693,7 +717,7 @@ p {
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 1;
+    /*z-index: 1;*/
     opacity: 1;
     background: -moz-linear-gradient(top, black 0, transparent 50%, transparent 63%, rgba(0, 0, 0, 1) 100%);
     background: -webkit-linear-gradient(top, black 0, transparent 50%, transparent 63%, rgba(0, 0, 0, 1) 100%);
@@ -1037,7 +1061,7 @@ p {
 }
 .ms-right-sidebar a:hover .post-item__title,
 .ms-right-sidebar a:hover .post-item__title {
-    color: #df1f29;
+    color: #a50000;
 }
 .ms-right-sidebar .post-item__title {
     margin-bottom: 0;
@@ -1225,7 +1249,7 @@ label.error {
     position: absolute;
     bottom: 1.2em;
     font-size: 12px;
-    color: #df1f29;
+    color: #a50000;
 }
 
 /**
@@ -1368,7 +1392,7 @@ footer {
         margin: 0 auto;
         display: inline-block;
         letter-spacing: .15em;
-        /*background: #df1f29;
+        /*background: #a50000;
         color: #fff;*/
         padding: .5em 0;
     }

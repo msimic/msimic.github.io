@@ -73,51 +73,134 @@
 		onArrow();
 	}); 
 
-	//document.addEventListener("touchmove", preventBehavior, {passive: false});
-	//document.body.addEventListener("touchmove", preventBehavior, {passive: false});
-
 	window.addEventListener("resize", onResize, {passive: false});
 
-var objNode = document.createElement("div");
-objNode.style.width  = "100vw";
-objNode.style.height = "100vh";
-document.body.appendChild(objNode);
-var intViewportWidth  = objNode.offsetWidth;
-var intViewportHeight = objNode.offsetHeight;
-document.body.removeChild(objNode);
-//alert("Width: " + intViewportWidth + " Height: "+ intViewportHeight);
-SetSize(intViewportHeight);
+    var objNode = document.createElement("div");
+    objNode.style.width  = "100vw";
+    objNode.style.height = "100vh";
+    document.body.appendChild(objNode);
+    var intViewportWidth  = objNode.offsetWidth;
+    var intViewportHeight = objNode.offsetHeight;
+    document.body.removeChild(objNode);
+    SetSize(intViewportHeight);
+
 	onResize();
 	
-function hashChanged() {
-	if (window.location.hash=="#map") {
-		swiper.slideTo(3);
-	}
-	else if (window.location.hash=="#play") {
-		swiper.slideTo(1);
-		window.showClient();
-	}
-	else if (window.location.hash=="#home") {
-		swiper.slideTo(0);
-	}
-	else if (window.location.hash=="#forum") {
-		swiper.slideTo(2);
-	}
-};
+    function hashChanged() {
+        if (window.location.hash=="#map") {
+            swiper.slideTo(3);
+        }
+        else if (window.location.hash=="#play") {
+            swiper.slideTo(1);
+            window.showClient();
+        }
+        else if (window.location.hash=="#home") {
+            swiper.slideTo(0);
+        }
+        else if (window.location.hash=="#forum") {
+            swiper.slideTo(2);
+        }
+    };
 
-window.hashChanged = hashChanged;
+    window.hashChanged = hashChanged;
+    window.player = new rPlayer();
+    window.playAudio = function() {
+        eraseCookie("audiopaused");
+        window.player.play("./sitefiles/music.mp3");
+        window.player._audio.loop = true;
+    };
+    window.pauseAudio = function() {
+        eraseCookie("audiopaused");
+        createCookie("audiopaused", true, 30);
+        window.player.pause();
+    };
 
-if (window.location.hash) window.needhashChanged = true;
+    window.audioForward = function() {
+        let p = window.player;
+        let t = p._audio.currentTime;
+        let d = p._audio.duration;
+        if (t < d) t+=(d/20);
+        if (t >= d) t = d;
+        p.currentTime = t;
+    };
 
-$("document").ready(function() {
-	swiper.slideTo(0);
-	onResize();
-	hashChanged();
-});
+    window.audioPrev = function() {
+        let p = window.player;
+        let t = p._audio.currentTime;
+        let d = p._audio.duration;
+        if (t > 0) t-=(d/20);
+        if (t <= 0) t = 0;
+        p.currentTime = t;
+    };
 
-window.addEventListener("hashchange", hashChanged, false);
+    $(".play-button").click(window.playAudio);
+    $(".pause-button").click(window.pauseAudio);
+    $(".next-button").click(window.audioForward);
+    $(".prev-button").click(window.audioPrev);
+
+    if (window.location.hash) window.needhashChanged = true;
+
+    $("document").ready(function() {       
+        swiper.slideTo(0);
+        onResize();
+        hashChanged();
+        window.player.stop();
+    });
+
+    window.addEventListener("hashchange", hashChanged, false);
+
+    setInterval(() => {
+        if (window.player.playing) {
+            $(".pause-button").show();
+            $(".play-button").hide();
+            $(".next-button").show();
+            $(".prev-button").show();
+        } else {
+            $(".play-button").show();
+            $(".pause-button").hide();
+            $(".next-button").hide();
+            $(".prev-button").hide();
+        }
+    }, 200);
 
 })(window);
+
+function createCookie(name, value, days) {
+    var expires;
+
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    } else {
+        expires = "";
+    }
+    document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+}
+
+function readCookie(name) {
+    var nameEQ = encodeURIComponent(name) + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) === ' ')
+            c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0)
+            return decodeURIComponent(c.substring(nameEQ.length, c.length));
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    createCookie(name, "", -1);
+}
+
+function playGame() {
+    if (!window.player.playing && !readCookie("audiopaused")) {
+        window.playAudio();
+    }
+    swiper.slideTo(1);history.replaceState(undefined, undefined, '#play');
+}
 
 /*------------------
  Page Transition

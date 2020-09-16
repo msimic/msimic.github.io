@@ -9,12 +9,14 @@
 	<script src="./sitefiles/iv-viewer.min.js"></script>
 	<link rel="stylesheet" href="./sitefiles/iv-viewer.min.css">
     <script type="text/javascript" src="./sitefiles/jquery-3.2.1.min.js"></script>
-    <!-- Vendors -->
-    <script type="text/javascript" src="./sitefiles/plugins.min.js"></script>
+	<script type="text/javascript" src="./sitefiles/plugins.min.js"></script>
+	<script type="text/javascript" src="./sitefiles/rplayer.js"></script>
 	 <script>
-    var dt = new Date();dt.setDate((dt.getDate()+31));
-    document.write('<meta http-equiv="expires" content="' + dt.toGMTString() + '"/>');
-  </script>
+		 // we don't have a real server, just hosting a HTML file as wrapper
+		 // make it expire every month so if an update is pushed, we cannot rely on the response caching headers
+		var dt = new Date();dt.setDate((dt.getDate()+31));
+		document.write('<meta http-equiv="expires" content="' + dt.toGMTString() + '"/>');
+  	</script>
   </head>
   <body>
     <div class="ms-main-container loaded" style="opacity: 1;">
@@ -25,12 +27,20 @@
         <nav class="ms-nav">
           <button class="hamburger" type="button" data-toggle="navigation">
           <span class="hamburger-box">
-		  <div class="ms-logo" style="position:fixed;bottom:20px;right:40px;height:32px !important;">
-            <a onclick="swiper.slideTo(1);history.replaceState(undefined, undefined, '#play');return false;" title="Gioca a Tempora Sanguinis 2" alt="Gioca" data-type="page-transition">
-              <div class="logo-dark"><img src="./sitefiles/Unicorn-dark.png" alt="logo image"></div>
-              <div class="logo-light current"><img src="./sitefiles/Unicorn-light.png" alt="logo image"></div>
-            </a>
-          </div>
+			<div class="ms-logo" style="position:fixed;bottom:20px;right:40px;height:32px !important;">
+				<a onclick="playGame();return false;" title="Gioca a Tempora Sanguinis" alt="Gioca" data-type="page-transition">
+				<div class="logo-dark"><img src="./sitefiles/Unicorn-dark.png" alt="logo image"></div>
+				<div class="logo-light current"><img src="./sitefiles/Unicorn-light.png" alt="logo image"></div>
+				</a>
+			</div>
+			<div class="ms-logo" style="position:fixed;bottom:20px;right:45px;height:32px !important;display: none;">
+				<a onclick="return false;" title="Audio" alt="Gioca" data-type="page-transition">
+				  <div class="play-button"><img src="./sitefiles/play.png" alt="Suona Audio"></div>
+				  <div class="pause-button"><img src="./sitefiles/pause.png" alt="Pausa Audio"></div>
+				  <div class="prev-button"><img src="./sitefiles/back.png" alt="Indietro Audio"></div>
+				  <div class="next-button"><img src="./sitefiles/forward.png" alt="Avanti Audio"></div>
+				</a>
+			  </div>
             <span class="hamburger-label">menu</span>
             <span class="hamburger-inner"></span>
           </span>
@@ -38,7 +48,7 @@
           <div class="height-full-viewport">
 			<div class="navbar-wrapper">
 				<div class="menu-title" aria-live="assertive">	
-					  <h3>Tempora Sanguinis 2<br></h3>
+					  <h3>Tempora Sanguinis<br></h3>
 				</div>
 				<ul class="ms-navbar">
 				  <!-- Nav Link -->
@@ -50,7 +60,7 @@
 				  </li>
 				  <!-- Nav Link -->
 				  <li class="nav-item">
-					<a disabled  alt="Gioca" onclick="swiper.slideTo(1);history.replaceState(undefined, undefined, '#play');return false;"  data-type="page-transition">
+					<a disabled  alt="Gioca" onclick="playGame();return false;"  data-type="page-transition">
 					  <span class="ms-btn">Gioca</span>
 					  <span class="nav-item__label">Connettiti e gioca online</span>
 					</a>
@@ -86,7 +96,7 @@
 				  <!-- Nav Link -->
 				  <li class="nav-item">
 					<a disabled  href="https://bitbucket.org/temporasanguinis/tskreator/downloads/?tab=downloads" data-type="page-transition">
-					  <span class="ms-btn">TSKreator</span>
+					  <span class="ms-btn">TsKreator</span>
 					  <span class="nav-item__label">Crea una zona</span>
 					</a>
 				  </li>
@@ -114,23 +124,23 @@
                 <div aria-live="assertive" class="slide-inner--image slider-box">
 				<h3 class="topheader">Benvenuto avventuriero!</h3>
 				<p>
-Midia, la bianca città posta al centro delle terre conosciute, ti accoglie tra le sue mura, cariche di storie e di leggende.</p>
+					Midia, la bianca città posta al centro delle terre conosciute, ti accoglie tra le sue mura, cariche di storie e di leggende.</p>
 
-<p>Le sue strade sono state percorse dagli eroi delle storie che ancora si narrano intorno al fuoco scoppiettante delle locande di Geldor, le sue torri hanno difeso i leggendari guerrieri ricordati nei cantici di Rhila, i suoi templi hanno visto i rituali segreti dei più devoti servitori degli dei. </p>
+					<p>Le sue strade sono state percorse dagli eroi delle storie che ancora si narrano intorno al fuoco scoppiettante delle locande di Geldor, le sue torri hanno difeso i leggendari guerrieri ricordati nei cantici di Rhila, i suoi templi hanno visto i rituali segreti dei più devoti servitori degli dei. </p>
 
-<p>Si dice che a volte, nelle notti di primavera, un vento lieve porti con sé le note di melodie ormai dimenticate che ancora oggi narrano la storia dell'Impero Celeste, scaldando il cuore dei prescelti che ne ascoltano il suono.</p>
+					<p>Si dice che a volte, nelle notti di primavera, un vento lieve porti con sé le note di melodie ormai dimenticate che ancora oggi narrano la storia dell'Impero Celeste, scaldando il cuore dei prescelti che ne ascoltano il suono.</p>
 
-<p>Forse questa melodia reclama il tuo nome, desiderosa di narrare la tua storia. Sarai degno di essere ricordato tra gli eroi di questa terra senza tempo?</p>
+					<p>Forse questa melodia reclama il tuo nome, desiderosa di narrare la tua storia. Sarai degno di essere ricordato tra gli eroi di questa terra senza tempo?</p>
 
-<p>Benvenuto a Midia, avventuriero.
-Benvenuto su Tempora Sanguinis.</p>
+					<p>Benvenuto a Midia, avventuriero.
+					Benvenuto su Tempora Sanguinis.</p>
 				</p>
 				<p>
-				Preparati ed <a style="cursor:pointer;" onclick="swiper.slideTo(3);history.replaceState(undefined, undefined, '#map');return false;" title="La Mappa di Tempora Sanguinis 2" alt="Mappa">esplora le terre conosciute dell'impero celeste</a>, su cui si aprono arcane fratture che portano a mondi astrali.
+				Preparati ed <a style="cursor:pointer;" onclick="swiper.slideTo(3);history.replaceState(undefined, undefined, '#map');return false;" title="La Mappa di Tempora Sanguinis" alt="Mappa">esplora le terre conosciute dell'impero celeste</a>, su cui si aprono arcane fratture che portano a mondi astrali.
 				</p>
 				<p>E se hai il coraggio 
-				<a style="cursor:pointer;" onclick="swiper.slideTo(1);history.replaceState(undefined, undefined, '#play');return false;" title="Gioca a Tempora Sanguinis 2" alt="Gioca">
-					gioca a Tempora Sanguinis 2
+				<a style="cursor:pointer;" onclick="playGame();return false;" title="Gioca a Tempora Sanguinis" alt="Gioca">
+					gioca a Tempora Sanguinis
 				</a> online. Oppure conettiti via telnet (o un client dedicato [CMUD, Mudlet,...]) a "mud.temporasanguinis.it" alla porta 4000.
 				</p>
 				<p>
@@ -140,8 +150,8 @@ Benvenuto su Tempora Sanguinis.</p>
 				</p>
                 </div>
                 <div class="slide-inner--info" aria-live="assertive">
-                  <h3>Tempora Sanguinis 2<br></h3>
-                  <a href="" onclick="swiper.slideTo(1);history.replaceState(undefined, undefined, '#play');return false;" title="Gioca a Tempora Sanguinis 2" data-type="page-transition" class="ms-btn--slider">Esplora, combatti, conquista!</a>
+                  <h3>Tempora Sanguinis<br></h3>
+                  <a href="" onclick="playGame();return false;" title="Gioca a Tempora Sanguinis" data-type="page-transition" class="ms-btn--slider">Esplora, combatti, conquista!</a>
                 </div>
               </div>
 			  	<div class="arrowcontainer">
@@ -192,19 +202,6 @@ Benvenuto su Tempora Sanguinis.</p>
               </div>
             </div>
           </div>
-          <!--<div class="swiper-nav-btn">
-            <div class="swiper-button-prev swiper-button-white swiper-button-disabled">prev</div>
-            <div class="swiper-button-next swiper-button-white">next</div>
-          </div>-->
-          <!-- Pagination -->
-          <!--<div class="expanded-timeline">
-            <div class="expanded-timeline__counter"><span>1</span><span>4</span></div>
-            <div class="swiper-pagination swiper-pagination-progress"><span class="swiper-pagination-progressbar" style="transform: translate3d(0px, 0px, 0px) scaleX(0.25) scaleY(1); transition-duration: 1000ms;"></span></div>
-            <div class="scroll-message">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.5 15.98" class="scroll-svg"><title>Asset 1</title><g>
-              <g data-name="Layer 1"><polygon fill="#fff" points="0 4.64 0.71 5.34 3.85 2.2 3.85 15.98 4.85 15.98 4.85 2.2 8 5.34 8.71 4.64 4.35 0.29 0 4.64"></polygon><polygon fill="#fff" points="11.65 0 11.65 13.79 8.5 10.64 7.79 11.35 12.15 15.7 16.5 11.35 15.79 10.64 12.65 13.79 12.65 0 11.65 0"></polygon></g></g></svg>Scroll
-            </div>
-          </div>-->
         </div>
       </main>
     </div>
