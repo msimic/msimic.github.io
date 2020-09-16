@@ -390,10 +390,10 @@ function HomeSlider() {
             onSlideChangeEnd: function() {
                 if (window.swiper) $('.expanded-timeline__counter span:first-child').text(swiper.activeIndex + 1);
 				if (window.swiper && window.swiper != undefined && window.swiper.activeIndex == 1) {
-					$(".ms-logo").hide();
+					$(".play-game").hide();
 					window.showClient();
 				} else {
-					$(".ms-logo").show();
+					$(".play-game").show();
 				}
             }
         };
