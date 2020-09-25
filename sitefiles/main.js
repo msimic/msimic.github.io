@@ -358,8 +358,11 @@
         $(this).removeClass("pergamena-visible");
     });
 
+    var clickedArea = false;
+
     $('.iv-large-image').click(function() { $(".pergamena").removeClass("pergamena-visible"); });
     $('.iv-large-image').on('touchstart', function(event) { 
+        if (clickedArea) return;
         $('.iv-image-view .map-selector').addClass('unhover');
         if ($(".pergamena").hasClass("pergamena-visible")) {
             $(".pergamena").removeClass("pergamena-visible");
@@ -388,6 +391,10 @@
         pg.removeClass("pergamena-visible")
         .css({'left':ev.clientX-pg.width()/2, 'top': ev.clientY-pg.height()/2})
         .addClass("pergamena-visible");
+        clickedArea = true;
+        setTimeout(function() {clickedArea = false;}, 100);
+        event.stopPropagation();
+        event.preventDefault();
         return false;
     });
 
