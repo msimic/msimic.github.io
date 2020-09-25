@@ -265,7 +265,7 @@
               if (previousLeft != sizeInfo.left ||
                 previousTop != sizeInfo.top ||
                 sizeInfo.width!=previousWidth) {
-                    $(this).removeClass("pergamena-visible");
+                    $(".pergamena").removeClass("pergamena-visible");
                 }
             if (sizeInfo.width==previousWidth) return;
             $(map).attr("")
@@ -353,6 +353,8 @@
         }
         $(this).removeClass("pergamena-visible");
     });
+
+    $('.iv-large-image').click(function() { $(".pergamena").removeClass("pergamena-visible"); });
 
     $("area").click((ev) => {
         var pg = $(".pergamena");
