@@ -298,6 +298,10 @@
         var img = $('.iv-large-image');
         if (img.length<1) return;
         $('.iv-image-view').append("<div class='map-selector unhover'>");
+        if (preventTimeout) {
+            clearTimeout(preventTimeout);
+        }
+        preventMap(img);
         $('#image-map area').hover(
             function () { 
                 if (img.attr("usemap")!="#image-map") {
@@ -356,6 +360,7 @@
 
     $('.iv-large-image').click(function() { $(".pergamena").removeClass("pergamena-visible"); });
     $('.iv-large-image').on('touchstart', function(event) { 
+        $('.iv-image-view .map-selector').addClass('unhover');
         if ($(".pergamena").hasClass("pergamena-visible")) {
             $(".pergamena").removeClass("pergamena-visible");
             event.stopPropagation();
