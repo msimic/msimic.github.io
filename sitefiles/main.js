@@ -268,7 +268,6 @@
                     $(".pergamena").removeClass("pergamena-visible");
                 }
             if (sizeInfo.width==previousWidth) return;
-            $(map).attr("")
             preventMap(img);
             var n, m, clen,
                 x = sizeInfo.width / previousWidth;
@@ -355,11 +354,27 @@
     });
 
     $('.iv-large-image').click(function() { $(".pergamena").removeClass("pergamena-visible"); });
+    $('.iv-large-image').on('touchstart', function(event) { 
+        if ($(".pergamena").hasClass("pergamena-visible")) {
+            $(".pergamena").removeClass("pergamena-visible");
+            event.stopPropagation();
+        }
+    });
+
+    $('.pergamena').on('touchstart', function(event) { 
+        event.stopPropagation();
+    });
 
     $("area").click((ev) => {
         var pg = $(".pergamena");
         $(".pergamena-title", pg).html("<p>"+$(ev.target).attr("alt")+"</p>");
         $(".pergamena-content", pg).html("<p>Le descrizioni delle zone sono ancora in sviluppo</p><p>C'e' un palio di divini per chi scrive le descrizioni migliori delle aree e le manda a Traxter.</p><p><b>Torna a vedere in futuro quando sono finite.</b></p><p>E in bocca al lupo per il concorso!</p>");
+        $.ajax({
+            url: "./sitefiles/aree/" + $(ev.target).attr("href")
+          })
+            .done(function( data ) {
+                $(".pergamena-content", pg).html(data);
+            });
         $(".pergamena-content").trigger("scroll");
         $(".pergamena-content")[0].scrollTop = 0;
         pg.removeClass("pergamena-visible")
