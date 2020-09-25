@@ -266,6 +266,7 @@
                 previousTop != sizeInfo.top ||
                 sizeInfo.width!=previousWidth) {
                     $(".pergamena").removeClass("pergamena-visible");
+                    $('.iv-image-view .map-selector').addClass('unhover');
                 }
             if (sizeInfo.width==previousWidth) return;
             preventMap(img);
