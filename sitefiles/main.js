@@ -73,6 +73,49 @@
 		onArrow();
 	}); 
 
+    // arrow2
+
+    var sld2 = $(".pergamena-content");
+	
+	function onArrow2() {
+		if (sld2.scrollTop() + 
+			sld2.innerHeight() + 8 >=  
+			sld2[0].scrollHeight) { 
+			$(".arrowcontainer2").hide();
+		} else {
+			$(".arrowcontainer2").show();
+		}
+	}
+	
+	var timeout2;
+	var speed2 = 400;
+
+	// Increment button
+	$('.arrowcontainer2').on('mousedown mouseup mouseleave', e => {
+	  if (e.type == "mousedown") {
+		increment(speed);
+	  } else {
+		stop()
+	  }
+	});
+
+	// Increment function
+	function increment(speed) {
+	  sld2.scrollTop(sld2.scrollTop()+15)
+	  timeout2 = setTimeout(() => {
+		increment(speed2*0.9);
+	  }, speed2);
+	}
+
+	function stop() {
+	  clearTimeout(timeout2);
+	}
+	
+	sld2.on('scroll', function() { 
+		onArrow2();
+	}); 
+    ///
+
 	window.addEventListener("resize", onResize, {passive: false});
 
     var objNode = document.createElement("div");
@@ -163,6 +206,167 @@
         }
     }, 200);
 
+    function getRenderedSize(contains, cWidth, cHeight, width, height, pos, pos2){
+        var oRatio = width / height,
+            cRatio = cWidth / cHeight;
+        return function() {
+          if (contains ? (oRatio > cRatio) : (oRatio < cRatio)) {
+            this.width = cWidth;
+            this.height = cWidth / oRatio;
+          } else {
+            this.width = cHeight * oRatio;
+            this.height = cHeight;
+          }      
+          this.left = (cWidth - this.width)*(pos/100);
+          this.right = this.width + this.left;
+          this.top = (cHeight - this.height)*(pos2/100);
+          this.bottom = this.height + this.top;
+          return this;
+        }.call({});
+      }
+
+    function getImgSizeInfo(img) {
+        var pos = window.getComputedStyle(img).getPropertyValue('object-position').split(' ');
+        return getRenderedSize(true,
+                               img.width,
+                               img.height,
+                               img.naturalWidth,
+                               img.naturalHeight,
+                               parseInt(pos[0]), pos[1] ? parseInt(pos[1]):100);
+      }
+
+      window.getImgSizeInfo = getImgSizeInfo;
+
+      var preventTimeout = 0;
+      function preventMap(img) {
+        $('.iv-image-view .map-selector').addClass('unhover');
+        $(img).removeAttr("usemap");
+        if (preventTimeout) {
+            clearTimeout(preventTimeout);
+        }
+        preventTimeout = setTimeout(() => {
+            $(img).attr("usemap","#image-map");
+        }, 500);
+      }
+
+      var previousWidth = 4096;
+    window.ImageMap = function (map, img) {
+        var n,
+            areas = map.getElementsByTagName('area'),
+            len = areas.length,
+            coords = [];
+        for (n = 0; n < len; n++) {
+            coords[n] = areas[n].coords.split(',');
+        }
+        this.resize = function () {
+              var sizeInfo = (getImgSizeInfo(img));
+            if (sizeInfo.width==previousWidth) return;
+            $(map).attr("")
+            preventMap(img);
+            var n, m, clen,
+                x = sizeInfo.width / previousWidth;
+            for (n = 0; n < len; n++) {
+                clen = coords[n].length;
+                for (m = 0; m < clen; m++) {
+                    coords[n][m] *= x;
+                }
+                
+                var tmp = [];
+                for (m = 0; m < clen; m++) {
+                    tmp[m] = coords[n][m];
+                }
+                tmp[0] += sizeInfo.left;
+                tmp[1] += sizeInfo.top;
+                areas[n].coords = tmp.join(',');
+            }
+            previousWidth = sizeInfo.width;
+            return true;
+        };
+        setInterval(this.resize, 200);
+    }
+
+    function checkImageLoaded() {
+        var img = $('.iv-large-image');
+        if (img.length<1) return;
+        $('.iv-image-view').append("<div class='map-selector unhover'>");
+        $('#image-map area').hover(
+            function () { 
+                if (img.attr("usemap")!="#image-map") {
+                    $('.iv-image-view .map-selector').addClass("unhover");
+                    return;
+                }
+                var coords = $(this).attr('coords').split(',');
+                var sizeInfo = getImgSizeInfo(img[0]);
+                var x = img[0].naturalWidth / sizeInfo.width;
+                coords[0] = parseInt(coords[0])
+                coords[1] = parseInt(coords[1])
+                coords[2] = parseInt(coords[2])
+                /*coords[0] /= x;
+                coords[1] /= x;
+                coords[2] /= x;*/
+
+                coords[0] = parseInt(coords[0]) + img.position().left;
+                coords[1] = parseInt(coords[1]) + img.position().top;
+
+                var tmp = {
+                    'left': (parseInt(coords[0])-parseInt(coords[2])/2),
+                    'top': (parseInt(coords[1])-parseInt(coords[2])/2),
+                    'right': (parseInt(coords[0])+parseInt(coords[2])/2),
+                    'bottom': (parseInt(coords[1])+parseInt(coords[2])/2),
+                    'borderradius': parseInt(parseInt(coords[2])),
+                };
+                tmp.width = tmp.right-tmp.left;
+                tmp.height = tmp.bottom-tmp.top;
+                $('.iv-image-view .map-selector').removeClass('unhover').css({
+                    'left': tmp.left+'px',
+                    'top': tmp.top + 'px',
+                    'width': tmp.width + 'px',
+                    'height': tmp.height + 'px',
+                    'border-radius': tmp.borderradius+'px',
+                })
+            },
+            function () { 
+                $('.iv-image-view .map-selector').addClass('unhover');
+            }
+        )
+        img.attr("usemap","#image-map");
+        var imageMap = new window.ImageMap(document.getElementById('image-map'), img[0]);
+        imageMap.resize();
+        clearInterval(timeout);
+    }
+    $(".pergamena").on("mouseout", function(ev) {
+        var e = ev.toElement || ev.relatedTarget;
+        if (!e || e.parentNode == this || e == this) {
+           return;
+        }
+        if ($(e).parents(".pergamena").length) {
+            return;
+        }
+        $(this).removeClass("pergamena-visible");
+    });
+
+    $("area").click((ev) => {
+        var pg = $(".pergamena");
+        $(".pergamena-title", pg).html("<p>"+$(ev.target).attr("alt")+"</p>");
+        $(".pergamena-content", pg).html("<p>Le descrizioni delle zone sono ancora in sviluppo</p><p>C'e' un palio di divini per chi scrive le descrizioni migliori delle aree e le manda a Traxter.</p><p><b>Torna a vedere in futuro quando sono finite.</b></p><p>E in bocca al lupo per il concorso!</p>");
+        $(".pergamena-content").trigger("scroll");
+        $(".pergamena-content")[0].scrollTop = 0;
+        pg.removeClass("pergamena-visible")
+        .css({'left':ev.clientX-pg.width()/2, 'top': ev.clientY-pg.height()/2})
+        .addClass("pergamena-visible");
+        return false;
+    });
+
+    $("area").bind('mousewheel', function(e){
+        var img = $('.iv-large-image');
+        preventMap(img);
+    });
+
+    var timeout = setInterval(checkImageLoaded, 500);
+    /*$(".pergamena-content").each(function (element, node) { 
+        new SimpleBar(node); 
+    });*/
+    
 })(window);
 
 function createCookie(name, value, days) {
@@ -350,7 +554,7 @@ function HomeSlider() {
                 }
             }
         };
-		
+		let scrollbarsInitilized = false;
         var swiperOptions = {
             loop: false,
             speed: 1000,
@@ -383,7 +587,6 @@ function HomeSlider() {
 				if (window.needhashChanged == true) {
 					window.needhashChanged = false;
 					setTimeout(window.hashChanged, 500);
-					alert();
 					return;
 				}
 			},

@@ -17,6 +17,88 @@ body {
     color: #999999;
 }
 
+.pergamena {
+    position: fixed;
+    top:0;
+    left:0;
+    width: 200px;
+    height: 300px;
+    opacity: 0;
+    background-image: url(./pergamena.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.pergamena-title p {
+    color: black;
+    font: 12px sans-serif !important;
+    font-weight: bold !important;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.pergamena-content p {
+    font: normal 12px sans-serif !important;
+    color: black;
+    margin-top: 3px;
+}
+
+.pergamena-title {
+    color: black;
+    top: 48px;
+    height: 40px;
+    left: 36px;
+    width: 138px;
+    overflow: hidden;
+    position: absolute;
+    transform: rotate(3deg);
+    text-align: center;
+    vertical-align: middle;
+    display: table;
+}
+.pergamena-content {
+    left: 33px;
+    height: 152px;
+    top: 83px;
+    width: 133px;
+    overflow-y: scroll;
+    position: absolute;
+    transform: rotate(3deg);
+}
+
+.pergamena-content::-webkit-scrollbar {
+    display: none;
+  }
+  .pergamena-content  {
+      overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+.pergamena-visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.iv-image-view .map-selector {
+    pointer-events: none;
+    position: absolute;
+    background-color: rgba(0,0,0,0.3);
+    left:0;
+    top:0;
+    right:0;
+    bottom:0;
+    color:#546E7A00;
+    transition-duration: .2s;
+      transition-timing-function: ease-out;
+      transition-property: color, background;
+  }
+  .iv-image-view .map-selector.unhover {
+    background-color:transparent;
+  }
+
 .slide-inner--info h3 {
     font-family: 'Berkshire Swash', cursive;
     color: #a50000;
@@ -66,6 +148,25 @@ html, body {
     bottom: 30px;
 	text-align:center;
 }
+
+.arrow2 {
+    animation: slide1 1s ease-in-out infinite;
+    margin-left: 0px;
+      height: auto;
+      width: auto;
+      bottom: 3%;
+      opacity: .5;
+      overflow: visible;
+      cursor:pointer;
+    height: 15px;
+  }
+  
+  .arrowcontainer2 {
+      position: absolute;
+      width:100%;
+      bottom: 50px;
+      text-align:center;
+  }
 
 @keyframes slide1 {
   0%,
