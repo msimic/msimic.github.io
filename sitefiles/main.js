@@ -250,6 +250,8 @@
       }
 
       var previousWidth = 4096;
+      var previousLeft = 0;
+      var previousTop = 0;
     window.ImageMap = function (map, img) {
         var n,
             areas = map.getElementsByTagName('area'),
@@ -260,6 +262,11 @@
         }
         this.resize = function () {
               var sizeInfo = (getImgSizeInfo(img));
+              if (previousLeft != sizeInfo.left ||
+                previousTop != sizeInfo.top ||
+                sizeInfo.width!=previousWidth) {
+                    $(this).removeClass("pergamena-visible");
+                }
             if (sizeInfo.width==previousWidth) return;
             $(map).attr("")
             preventMap(img);
@@ -280,6 +287,8 @@
                 areas[n].coords = tmp.join(',');
             }
             previousWidth = sizeInfo.width;
+            previousLeft = sizeInfo.left;
+            previousTop = sizeInfo.top;
             return true;
         };
         setInterval(this.resize, 200);
