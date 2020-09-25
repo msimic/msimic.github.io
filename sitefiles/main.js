@@ -380,6 +380,8 @@
           })
             .done(function( data ) {
                 $(".pergamena-content", pg).html(data);
+                $(".pergamena-content").trigger("scroll");
+                $(".pergamena-content")[0].scrollTop = 0;
             });
         $(".pergamena-content").trigger("scroll");
         $(".pergamena-content")[0].scrollTop = 0;
