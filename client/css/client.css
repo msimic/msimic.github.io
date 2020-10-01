@@ -10,6 +10,28 @@ a:link, a:visited {
     border: 1px solid black;
 }
 
+@font-face {
+    font-family: 'Bitstream-Vera-Sans-Mono';
+      src:  url('Bitstream-Vera-Sans-Mono.ttf.woff') format('woff'),
+      url('Bitstream-Vera-Sans-Mono.ttf.svg#Bitstream-Vera-Sans-Mono') format('svg'),
+      url('Bitstream-Vera-Sans-Mono.ttf.eot'),
+      url('Bitstream-Vera-Sans-Mono.eot?#iefix') format('embedded-opentype'); 
+      font-weight: normal;
+      font-style: normal;
+  }
+  
+.vera {
+font-family: 'Bitstream-Vera-Sans-Mono' !important;  
+}
+
+.CodeMirror-hints {
+    z-index: 9999 !important;
+}
+
+.CodeMirror-Tern-tooltip {
+    z-index: 9999 !important;
+}
+
 #mudslinger {
     width: 100%;
     max-width: 100%;
@@ -48,12 +70,23 @@ a:link, a:visited {
     width: 100%;
 }
 
+.customWindow .outputText {
+    box-sizing: border-box;
+    padding: 5px !important;
+}
+
 .output-prewrap {
 	white-space: pre !important;
 }
 
 .jqx-menu, .jqx-menu-popup {
     z-index: 9999 !important;
+}
+
+.jqx-menu-item label {
+    width: 100% !important;
+    position: relative !important;
+    display: inline-block !important;
 }
 
 body {
@@ -72,6 +105,12 @@ body {
     overflow-y:scroll;
     overflow-x:auto;
     width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+    padding-left: 15px;
+    margin-bottom: 5px;
+    flex: 1;
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
 .outputText::-webkit-scrollbar {
@@ -82,6 +121,10 @@ body {
 .outputText {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+.smallest-text {
+	font-size: xx-small !important;
 }
 
 .extra-small-text {
@@ -102,6 +145,55 @@ body {
 
 .extra-large-text {
 	font-size: x-large !important;
+}
+
+.jqx-window ul {
+    border: 1px solid transparent;
+    box-shadow: 0px 0px 1px 0px rgb(21 106 167 / 77%), -1px -1px 1px 0px rgb(21 106 167 / 77%) inset;
+    border-radius: 3px;
+    padding: 3px;
+    outline: none !important;
+    transition: all 0.2s ease-in-out;
+}
+
+.jqx-window ul:hover {
+    box-shadow: 0px 0px 2px 0px rgb(21 106 167 / 77%), -1px -1px 2px 0px rgb(21 106 167 / 77%) inset;
+}
+
+.jqx-window input[type=text] {
+    border: 1px solid transparent;
+    border-radius: 3px;
+    box-shadow: 0px 0px 1px 0px rgb(21 106 167 / 77%), 0px 0px 1px 0px rgb(21 106 167 / 77%) inset;
+    border-radius: 3px;
+    padding: 3px;
+    outline: none !important;
+    transition: all 0.2s ease-in-out;
+}
+
+.jqx-window input[type=password] {
+    border: 1px solid transparent;
+    border-radius: 3px;
+    box-shadow: 0px 0px 1px 0px rgb(21 106 167 / 77%), 0px 0px 1px 0px rgb(21 106 167 / 77%) inset;
+    border-radius: 3px;
+    padding: 3px;
+    outline: none !important;
+    transition: all 0.2s ease-in-out;
+}
+
+.jqx-window input[type=text]:hover {
+    border: 1px solid rgb(21 106 167 / 77%);
+}
+
+.jqx-window input[type=text]:focus {
+    border: 1px solid rgb(21 106 167 / 77%);
+}
+
+.jqx-window input[type=password]:hover {
+    border: 1px solid rgb(21 106 167 / 77%);
+}
+
+.jqx-window input[type=password]:focus {
+    border: 1px solid rgb(21 106 167 / 77%);
 }
 
 #cmdInput {
@@ -133,9 +225,140 @@ body {
     font-family: "Consolas", monospace !important;
 }
 
+.lucida {
+    font-family: "Lucida Console", monospace !important;
+}
+
 .monospace {
     font-family: monospace !important;
 }
+
+.messageboxbuttons {
+    margin-top: 5px;
+    text-align: center;
+}
+
+.messageboxtext {
+    padding:5px;
+}
+
+.acceptbutton {
+    min-width: 100px;
+}
+
+.cancelbutton {
+    min-width: 100px;
+}
+
+.winProfiles-modifica {
+    float: left;
+    margin-top: 10px !important;
+}
+.winProfiles-elimina {
+    float: left;
+    margin-top: 10px !important;
+}
+
+.winProfiles-crea {
+    float: left;
+    margin-top: 10px !important;
+}
+
+.winProfiles-connect {
+    font-size: large !important;
+    float: right;
+    padding: 10px !important;
+}
+
+.greenbutton {
+    color: white !important;
+    background-color: rgb(108, 150, 25) !important;
+    font-weight: normal !important;
+}
+
+.yellowbutton {
+    color: black !important;
+    background-color: #fced99 !important;
+    font-weight: normal !important;
+}
+
+.redbutton {
+    color: white !important;
+    background-color: rgb(209, 77, 77) !important;
+    font-weight: normal !important;
+}
+
+.bluebutton {
+    font-weight: normal !important;
+    color: #d6d6d6 !important;
+    background-color: rgb(109, 118, 250) !important;
+}
+
+.bluebutton:disabled {
+    color: #eae7e7 !important;
+}
+.inner-box {
+    border: 1px solid transparent;
+}
+.select-box {
+    cursor: pointer;
+    position: relative;
+    margin: 5px 0px 5px -5px;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 10px;
+    border-right: 5px transparent;
+  }
+  
+  .dropdown,
+  .label {
+    color: #414141;
+    display: block;
+    font: 400 16px sans-serif;
+    cursor: pointer;
+  }
+  
+  .dropdown {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    padding: 5px 0;
+    height: 30px;
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: opacity(0);
+    background: none transparent;
+    border: 0 none;
+    box-shadow: 2px 2px 2px 2px #414141;
+  }
+
+  .focused {
+    border: 1px solid black;
+  }
+
+  .select-box1 {
+    background: #ececec;
+  }
+  
+  .label {
+    position: relative;
+    padding: 5px 10px;
+    cursor: pointer;
+    height: 16px;
+  }
+  .open .profile-label::after {
+     content: "▲";
+  }
+  .label::after {
+    content: "▼";
+    font-size: 12px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 5px 15px;
+    border-left: 5px solid #fff;
+  }
+
 
 .chkCmdInputCmdStackCont {
     display: block;
@@ -192,6 +415,16 @@ body {
     width: 100px;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
+.label-filter {
+    margin-top: 3px;
+}
+.winEdit-filter {
+    margin-bottom: 2px;
+}
 /*
 .winEdit-btnNew {}
 .winEdit-btnDelete {}
@@ -204,15 +437,50 @@ body {
 .winEdit-scriptArea{}
 */
 
+.jqx-window {
+    /*border: 1px solid #a8a8a869 !important;*/
+    box-shadow: 1px 1px 5px 2px rgb(0,0,0);
+}
+
+.jqx-window-header {
+    background-color: rgb(21 106 167 / 77%);
+    color: white;
+}
+
+.jqx-window-collapse-button {
+    background-color: #c5b3b3;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+    margin: 2px !important;
+}
+
+.jqx-window-collapse-button-background {
+    margin-top: -2px !important;
+    margin-right: 12px !important;
+}
+
+.jqx-window-collapse-button:hover {
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
 .jqx-window-close-button {
-    background-color: #b5b3b3
+    background-color: #c5b3b3;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.jqx-window-close-button-background {
+    margin-top: -2px !important;
+}
+
+.jqx-window-close-button:hover {
+    border: 1px solid rgba(255,255,255,0.5);
 }
 
 .jqx-window-content button {
     position: static;
 	font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;
     -webkit-transition: color 300ms ease, background-color 300ms ease, opacity 300ms ease;
-    transition: color 300ms ease, background-color 300ms ease, opacity 300ms ease;
     color: #403f3f;
     background-color: #b7b7b7;
     display: inline-block;
@@ -224,14 +492,20 @@ body {
     padding: 5px 7px;
     margin: 4px 2px;
     border-radius: 3px;
-    border: 0;
+    border: 1px solid #0a0a0a21;
     cursor: pointer;
     font-weight: bold;
+    transform: translate3d(0, 0, 0);
+    transition: all .2s ease-in-out;
+    /*transition: color 300ms ease, background-color 300ms ease, opacity 300ms ease;*/
 }
 .jqx-window-content button:hover {
-  background-image: linear-gradient(#b7b7b7 0%, #999999 100%) !important;
-  color: black;
+  /*background-image: linear-gradient(#b7b7b7 0%, #999999 100%) !important;*/
+  /*color: black;*/
   font-weight: bolder;
+  transform: translate3d(-1px, -1px, 0) scale(1.05);
+    box-shadow: -5px -5px 5px 2px rgba(255, 255, 255, 0.2) inset, 
+                5px 5px 5px 2px rgba(255, 255, 255, 0.2) inset;
 }
 .jqx-window-content button:disabled {
     background-image: linear-gradient(#dad7d7 0%, #cec7c7 100%) !important;
@@ -244,7 +518,7 @@ body {
     font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;
 }
 .jqx-widget-content {
-	border-color: transparent !important;
+	border: none;
     background: #ddd !important;
 }
 
