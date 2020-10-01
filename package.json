@@ -1,0 +1,19 @@
+{
+  "name": "tempora-sanguinis",
+  "version": "0.0.1",
+  "scripts": {
+    "createfolders": ".\\buildfiles\\createfolder.bat",
+    "compile": "node buildfiles/build.js",
+    "copy": "copy .\\sitefiles\\*.png .\\dist\\sitefiles\\ && copy .\\sitefiles\\*.jpg .\\dist\\sitefiles\\ && copy .\\sitefiles\\all.* .\\dist\\sitefiles\\ && copy .\\sitefiles\\aree\\* .\\dist\\sitefiles\\aree\\",
+    "build": "npm run createfolders && npm run compile && npm run copy",
+    "build-dev": "node buildfiles/build-dev.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@node-minify/clean-css": "^6.1.0",
+    "@node-minify/core": "^6.1.0",
+    "@node-minify/html-minifier": "^6.1.0",
+    "@node-minify/no-compress": "^6.1.0",
+    "@node-minify/terser": "^6.1.0"
+  }
+}

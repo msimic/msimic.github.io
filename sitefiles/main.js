@@ -9,16 +9,38 @@
     // All Funtions
     PageTransition();
     Menu();
+
+    var Body = $("#body");
+    	
+	function onResize() {
+        $(".arrowcontainerContenuti").hide();
+        $(".arrowcontainer").hide();
+		SetSize(document.documentElement.clientHeight);
+		onArrow();onArrowContenuti();
+    }
+    
+    window.resizeFunc = onResize;
+
     HomeSlider();
     Sort();
     UniteGallery();
     ValidForm();
+
+    const image = document.querySelector('#map');
+    const options = {
+        zoomValue: 30,
+        maxZoom: 500,
+        snapView: true,
+        refreshOnResize: true,
+        zoomOnMouseWheel: true
+    };
+    const viewer = new ImageViewer(image, options);
+    viewer.load('./sitefiles/mappa_small.jpg', './sitefiles/mappa.jpg');
+    
 	//window.scrollTo(0,1);
 	function preventBehavior(e) {
 		e.preventDefault(); 
 	};
-
-	var Body = $("#Body");
 	
 	function SetSize(h) {
 		Body.height(h);
@@ -28,20 +50,28 @@
 		//alert(" Height: "+ Body.height());
 	}
 	
-	var sld = $(".swiper-slide-active .slider-box");
-	
-	function onResize() {
-		SetSize(document.documentElement.clientHeight);
-		onArrow();
-	}
-	
+
 	function onArrow() {
+        var sld = $(".swiper-slide-active .slider-box");
+        if (!sld.length) return;
 		if (sld.scrollTop() + 
 			sld.innerHeight() + 8 >=  
 			sld[0].scrollHeight) { 
 			$(".arrowcontainer").hide();
 		} else {
 			$(".arrowcontainer").show();
+		}
+    }
+    
+    function onArrowContenuti() {
+        var sld = $(".swiper-slide-active .slider-box");
+        if (!sld.length) return;
+		if (sld.scrollTop() + 
+			sld.innerHeight() + 8 >=  
+			sld[0].scrollHeight) { 
+			$(".arrowcontainerContenuti").hide();
+		} else {
+			$(".arrowcontainerContenuti").show();
 		}
 	}
 	
@@ -55,10 +85,19 @@
 	  } else {
 		stop()
 	  }
-	});
+    });
+    
+    $('.arrowcontainerContenuti').on('mousedown mouseup mouseleave', e => {
+        if (e.type == "mousedown") {
+          increment(speed);
+        } else {
+          stop()
+        }
+      });
 
 	// Increment function
 	function increment(speed) {
+        var sld = $(".swiper-slide-active .slider-box");
 	  sld.scrollTop(sld.scrollTop()+15)
 	  timeout = setTimeout(() => {
 		increment(speed*0.9);
@@ -69,8 +108,9 @@
 	  clearTimeout(timeout);
 	}
 	
-	sld.on('scroll', function() { 
-		onArrow();
+	$(".slider-box").on('scroll', function() { 
+        onArrow();
+        onArrowContenuti();
 	}); 
 
     // arrow2
@@ -93,17 +133,17 @@
 	// Increment button
 	$('.arrowcontainer2').on('mousedown mouseup mouseleave', e => {
 	  if (e.type == "mousedown") {
-		increment(speed);
+		increment2(speed);
 	  } else {
 		stop()
 	  }
 	});
 
 	// Increment function
-	function increment(speed) {
+	function increment2(speed) {
 	  sld2.scrollTop(sld2.scrollTop()+15)
 	  timeout2 = setTimeout(() => {
-		increment(speed2*0.9);
+		increment2(speed2*0.9);
 	  }, speed2);
 	}
 
@@ -131,17 +171,19 @@
 	
     function hashChanged() {
         if (window.location.hash=="#map") {
-            swiper.slideTo(3);
+            slideToPage("map");
         }
         else if (window.location.hash=="#play") {
-            swiper.slideTo(1);
-            window.showClient();
+            slideToPage("play");
         }
         else if (window.location.hash=="#home") {
-            swiper.slideTo(0);
+            slideToPage("home");
         }
         else if (window.location.hash=="#forum") {
-            swiper.slideTo(2);
+            slideToPage("forum");
+        }
+        else if (window.location.hash=="#contenuti") {
+            slideToPage("contenuti");
         }
     };
 
@@ -441,7 +483,7 @@ function eraseCookie(name) {
 }
 
 function playGame() {
-    if (!window.player.playing && !readCookie("audiopaused")) {
+    if (!window.player.playing && !readCookie("audiopaused") && $(".audipanel").is(":visible")) {
         window.playAudio();
     }
     swiper.slideTo(1);history.replaceState(undefined, undefined, '#play');
@@ -532,6 +574,26 @@ function Menu() {
     }
 }
 
+window.slideToPage = function(page, replaceHistory) {
+    if (page == "map") {
+        swiper.slideTo(4);
+    }
+    else if (page=="play") {
+        swiper.slideTo(1);
+        window.showClient();
+    }
+    else if (page=="home") {
+        swiper.slideTo(0);
+    }
+    else if (page=="forum") {
+        swiper.slideTo(2);
+    }
+    else if (page=="contenuti") {
+        swiper.slideTo(3);
+    }
+    if (replaceHistory) history.replaceState(undefined, undefined, '#'+page);
+}
+
 window.showClient=function() {
 	if ($("#gioco").find("iframe").length == 0) {
 		var ifr = $('<iframe frameBorder="0" width="100%" height="100%" style="position:fixed;margin:0 !important;padding:0 !important;width: 100%;height:100%" src="/client/index.html?host=auto&rng=' + Math.ceil(Math.random() * 1000000) + '">Browser non compatibile. Usa Firefox o Chrome.</iframe>');
@@ -572,9 +634,9 @@ function HomeSlider() {
                     $(slide).css({
                         transform: 'translate3d(' + translate + 'px,0,0)'
                     });
-                    $(slide).find('.slide-inner').css({
+                    /*$(slide).find('.slide-inner').css({
                         transform: 'translate3d(' + innerTranslate + 'px,0,0)',
-                    });
+                    });*/
                 }
             },
             onTouchStart: function(swiper) {
@@ -598,7 +660,11 @@ function HomeSlider() {
 		let scrollbarsInitilized = false;
         var swiperOptions = {
             loop: false,
+            loopFillGroupWithBlank: false,
             speed: 1000,
+            /*hashNavigation: {
+                watchState: true,
+              },*/
             grabCursor: false,
             watchSlidesProgress: true,
             mousewheelControl: false,
@@ -621,8 +687,20 @@ function HomeSlider() {
 			observer: true,
             observeParents: true,
 			initialSlide: 2,
-			fadeEffect: { crossFade: true },
-			slidesPerView: 1,
+            fadeEffect: { crossFade: true },
+            flipEffect: {
+                slideShadows: true,
+                limitRotation: true
+            },
+            coverflowEffect: {
+                rotate: 30,
+                slideShadows: false,
+              },
+              cubeEffect: {
+                slideShadows: false,
+              },
+            effect: "fade",
+            slidesPerView: 1,
             paginationType: 'progress',
 			init: function() { 
 				if (window.needhashChanged == true) {
@@ -630,8 +708,13 @@ function HomeSlider() {
 					setTimeout(window.hashChanged, 500);
 					return;
 				}
-			},
+            },
+            onSlideChangeStart: function() {
+                window.resizeFunc();
+            },
             onSlideChangeEnd: function() {
+                window.resizeFunc();
+                if (!swiper) return;
                 if (window.swiper) $('.expanded-timeline__counter span:first-child').text(swiper.activeIndex + 1);
 				if (window.swiper && window.swiper != undefined && window.swiper.activeIndex == 1) {
 					$(".play-game").hide();
@@ -641,7 +724,7 @@ function HomeSlider() {
 				}
             }
         };
-        swiperOptions = $.extend(swiperOptions, interleaveEffect);
+        swiperOptions = $.extend(swiperOptions, {}/*interleaveEffect*/);
         var swiper = new Swiper('.swiper-container', swiperOptions);
 		swiper.allowTouchMove = false;
 		swiper.allowSlidePrev = false;
